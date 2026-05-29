@@ -23,6 +23,7 @@ export default function ContactForm() {
     if (!form.nombre.trim()) errs.nombre = 'El nombre es requerido.';
     if (!form.email.trim()) errs.email = 'El correo es requerido.';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errs.email = 'Correo inválido.';
+    if (!form.telefono.trim()) errs.telefono = 'El teléfono es requerido.';
     if (!form.mensaje.trim()) errs.mensaje = 'El mensaje es requerido.';
     setErrors(errs);
     return Object.keys(errs).length === 0;
@@ -114,15 +115,18 @@ export default function ContactForm() {
         </div>
         <div>
           <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">
-            Teléfono (opcional)
+            Teléfono <span className="text-red-500">*</span>
           </label>
           <input
             type="tel"
             value={form.telefono}
             onChange={(e) => setForm({ ...form, telefono: e.target.value })}
             placeholder="+504 0000-0000"
-            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:border-primary text-sm text-slate-800 placeholder:text-slate-400 outline-none transition-colors"
+            className={`w-full px-4 py-2.5 rounded-xl border text-sm text-slate-800 placeholder:text-slate-400 outline-none transition-colors ${
+              errors.telefono ? 'border-red-400 bg-red-50' : 'border-slate-200 bg-slate-50 focus:border-primary'
+            }`}
           />
+          {errors.telefono && <p className="text-red-500 text-xs mt-1">{errors.telefono}</p>}
         </div>
       </div>
 
