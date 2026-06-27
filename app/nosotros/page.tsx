@@ -32,12 +32,13 @@ const valores = [
   },
 ];
 
-const equipo = [
-  { nombre: 'Nombre Apellido', cargo: 'Gerente General', seed: 'person-ceo' },
-  { nombre: 'Nombre Apellido', cargo: 'Director Comercial', seed: 'person-sales' },
-  { nombre: 'Nombre Apellido', cargo: 'Líder de Soporte Técnico', seed: 'person-tech' },
-  { nombre: 'Nombre Apellido', cargo: 'Consultora Contable', seed: 'person-accounting' },
-];
+// Sección de equipo oculta temporalmente — pendiente de fotos y nombres reales (implementación futura).
+// const equipo = [
+//   { nombre: 'Nombre Apellido', cargo: 'Gerente General', seed: 'person-ceo' },
+//   { nombre: 'Nombre Apellido', cargo: 'Director Comercial', seed: 'person-sales' },
+//   { nombre: 'Nombre Apellido', cargo: 'Líder de Soporte Técnico', seed: 'person-tech' },
+//   { nombre: 'Nombre Apellido', cargo: 'Consultora Contable', seed: 'person-accounting' },
+// ];
 
 export default async function NosotrosPage() {
   return (
@@ -61,8 +62,8 @@ export default async function NosotrosPage() {
             </div>
             <div className="relative h-72 lg:h-96 rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
               <Image
-                src="https://picsum.photos/seed/solteci-about-hero/600/400"
-                alt="Oficinas de Solteci en San Pedro Sula"
+                src="/imagenes/san-pedro-sula-nosotros.png"
+                alt="San Pedro Sula"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
@@ -77,14 +78,55 @@ export default async function NosotrosPage() {
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="relative h-80 rounded-2xl overflow-hidden shadow-lg">
-              <Image
-                src="https://picsum.photos/seed/solteci-history/540/320"
-                alt="Historia de Solteci"
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
-              />
+            <div className="grid grid-rows-[1.7fr_1fr] gap-3 h-[26rem]">
+              {/* San Pedro Sula — raíces locales */}
+              <div className="relative rounded-2xl overflow-hidden shadow-lg">
+                <Image
+                  src="/imagenes/san-pedro-sula-nosotros-2.jpg"
+                  alt="Vista aérea de San Pedro Sula, Honduras"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                />
+                <div className="absolute bottom-3 left-3 bg-primary/90 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                  <MapPin size={13} className="text-accent" />
+                  San Pedro Sula, Honduras
+                </div>
+              </div>
+
+              {/* Productos que distribuimos */}
+              <div className="grid grid-cols-3 gap-3">
+                <div className="relative rounded-xl bg-white border border-slate-200 shadow-sm">
+                  <Image
+                    src="/imagenes/contpaqi-contabilidad.png"
+                    alt="CONTPAQi"
+                    fill
+                    sizes="160px"
+                    className="object-contain p-3"
+                  />
+                </div>
+                <div className="relative rounded-xl bg-white border border-slate-200 shadow-sm">
+                  <Image
+                    src="/imagenes/logo_softrestaurant.png"
+                    alt="SoftRestaurant"
+                    fill
+                    sizes="160px"
+                    className="object-contain p-3"
+                  />
+                </div>
+                <div className="rounded-xl bg-white border border-slate-200 shadow-sm flex flex-col items-center justify-center gap-1.5">
+                  <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center p-2">
+                    <Image
+                      src="/imagenes/iSync_logo_white.svg"
+                      alt=""
+                      width={28}
+                      height={28}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  <span className="text-primary font-bold text-sm leading-none">iSync</span>
+                </div>
+              </div>
             </div>
             <div>
               <SectionTitle title="Nuestra Historia" centered={false} />
@@ -161,7 +203,7 @@ export default async function NosotrosPage() {
         </div>
       </section>
 
-      {/* Equipo */}
+      {/* Equipo — oculto temporalmente, pendiente de fotos y nombres reales (implementación futura)
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionTitle title="Nuestro Equipo" subtitle="Profesionales comprometidos con el éxito de tu empresa." />
@@ -184,6 +226,7 @@ export default async function NosotrosPage() {
           </div>
         </div>
       </section>
+      */}
 
       {/* Ubicación */}
       <section className="py-20 bg-slate-50">
@@ -199,7 +242,7 @@ export default async function NosotrosPage() {
                 </div>
               </div>
               <a
-                href="https://maps.google.com/?q=San+Pedro+Sula+Honduras"
+                href="https://maps.app.goo.gl/yJUkvHoGx3xcfAYj9"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-5 py-2.5 rounded-full text-sm transition-colors mt-2"
@@ -208,20 +251,15 @@ export default async function NosotrosPage() {
                 Ver en Google Maps
               </a>
             </div>
-            <div className="relative h-64 rounded-2xl overflow-hidden shadow-lg">
-              <Image
-                src="https://picsum.photos/seed/san-pedro-sula-map/600/256"
-                alt="Ubicación de Solteci en San Pedro Sula"
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
+            <div className="relative h-64 rounded-2xl overflow-hidden shadow-lg ring-1 ring-slate-200">
+              <iframe
+                title="Ubicación de Solteci en San Pedro Sula"
+                src="https://www.google.com/maps?q=15.5001352,-88.0359958&z=16&hl=es&output=embed"
+                className="absolute inset-0 h-full w-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
               />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg flex items-center gap-2">
-                  <MapPin size={15} className="text-accent" />
-                  Barrio Suyapa, Edificio Nova, San Pedro Sula
-                </div>
-              </div>
             </div>
           </div>
         </div>

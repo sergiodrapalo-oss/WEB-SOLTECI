@@ -27,18 +27,18 @@ export default function NuestraEmpresa() {
             {/* Main photo */}
             <div className="absolute top-0 left-0 w-[65%] h-[75%] rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="https://picsum.photos/seed/solteci-team/420/315"
-                alt="Equipo de Solteci"
+                src="/imagenes/san-pedro-sula.jpg"
+                alt="San Pedro Sula"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>
             {/* Secondary photo */}
-            <div className="absolute bottom-0 right-0 w-[50%] h-[55%] rounded-2xl overflow-hidden shadow-xl ring-4 ring-white">
+            <div className="absolute bottom-0 right-0 w-[50%] h-[55%] rounded-2xl overflow-hidden shadow-xl ">
               <Image
-                src="https://picsum.photos/seed/solteci-office2/300/230"
-                alt="Oficinas Solteci en San Pedro Sula"
+                src="/imagenes/softrestaurant-inicio.png"
+                alt="Panel de análisis y reportes de gestión"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"

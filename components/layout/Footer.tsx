@@ -8,9 +8,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <div className="bg-white rounded-lg px-4 py-2 inline-block">
+            <div className="px-4 py-2 inline-block">
               <Image
-                src="/imagenes/Logo Solteci Fondo Blanco.png"
+                src="/imagenes/logo-solteci_white.png"
                 alt="Solteci"
                 width={130}
                 height={42}
@@ -35,7 +35,7 @@ export default function Footer() {
                 { href: '/', label: 'Inicio' },
                 { href: '/nosotros', label: 'Nosotros' },
                 { href: '/software', label: 'Software' },
-                { href: '/clientes', label: 'Clientes' },
+                // { href: '/clientes', label: 'Clientes' }, // Oculto temporalmente — implementación futura
                 { href: '/contacto', label: 'Contacto' },
               ].map((link) => (
                 <li key={link.href}>

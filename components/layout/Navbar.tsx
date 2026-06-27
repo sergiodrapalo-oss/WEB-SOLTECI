@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Menu, X, MessageCircle, ChevronRight } from 'lucide-react';
 import {
@@ -39,16 +40,28 @@ const mobileLinks = [
   { href: '/', label: 'Inicio' },
   { href: '/nosotros', label: 'Nosotros' },
   { href: '/software', label: 'Software' },
-  { href: '/clientes', label: 'Clientes' },
+  // { href: '/clientes', label: 'Clientes' }, // Oculto temporalmente — implementación futura
   { href: '/contacto', label: 'Contacto' },
 ];
 
 const triggerStyle =
-  'bg-transparent text-white/80 hover:bg-white/10 hover:text-white data-popup-open:bg-white/10 data-popup-open:text-white';
+  'bg-transparent text-white/80 transition-colors ' +
+  // Hover: queda igual (fondo sutil, texto blanco).
+  'hover:bg-white/10 hover:text-white ' +
+  // Clic / foco: el componente base pone fondo claro; forzamos texto azul para que sea legible.
+  'focus:bg-white focus:text-primary focus-visible:bg-white focus-visible:text-primary ' +
+  // Dropdown abierto: mismo tratamiento (fondo claro + texto azul).
+  'data-popup-open:bg-white data-popup-open:text-primary data-open:bg-white data-open:text-primary';
+
+// Estado "seleccionado" de la sección actual: pastilla blanca + texto azul, estable en hover.
+const activeStyle = 'bg-white text-primary hover:bg-white hover:text-primary';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  // Marca la sección actual. Inicio solo en '/'; las demás por prefijo de ruta.
+  const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -67,13 +80,14 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <div className="bg-white rounded-lg px-3 py-1">
+            {/* Agregar 'bg-white' al 'className' para fondo blanco */}
+            <div className="rounded-lg px-3 py-2">
               <Image
-                src="/imagenes/Logo Solteci Fondo Blanco.png"
+                src="/imagenes/logo-solteci_white.svg"
                 alt="Solteci"
-                width={110}
-                height={36}
-                className="h-9 w-auto"
+                width={130}
+                height={44}
+                className="h-11 w-auto"
                 priority
               />
             </div>
@@ -85,21 +99,27 @@ export default function Navbar() {
               <NavigationMenuList>
                 {/* Inicio */}
                 <NavigationMenuItem>
-                  <Link href="/" className={cn(navigationMenuTriggerStyle(), triggerStyle)}>
+                  <Link
+                    href="/"
+                    className={cn(navigationMenuTriggerStyle(), triggerStyle, isActive('/') && activeStyle)}
+                  >
                     Inicio
                   </Link>
                 </NavigationMenuItem>
 
                 {/* Nosotros */}
                 <NavigationMenuItem>
-                  <Link href="/nosotros" className={cn(navigationMenuTriggerStyle(), triggerStyle)}>
+                  <Link
+                    href="/nosotros"
+                    className={cn(navigationMenuTriggerStyle(), triggerStyle, isActive('/nosotros') && activeStyle)}
+                  >
                     Nosotros
                   </Link>
                 </NavigationMenuItem>
 
                 {/* Software — con mega dropdown */}
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className={cn(triggerStyle)}>
+                  <NavigationMenuTrigger className={cn(triggerStyle, isActive('/software') && activeStyle)}>
                     Software
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
@@ -141,16 +161,20 @@ export default function Navbar() {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
-                {/* Clientes */}
+                {/* Clientes — oculto temporalmente, implementación futura
                 <NavigationMenuItem>
                   <Link href="/clientes" className={cn(navigationMenuTriggerStyle(), triggerStyle)}>
                     Clientes
                   </Link>
                 </NavigationMenuItem>
+                */}
 
                 {/* Contacto */}
                 <NavigationMenuItem>
-                  <Link href="/contacto" className={cn(navigationMenuTriggerStyle(), triggerStyle)}>
+                  <Link
+                    href="/contacto"
+                    className={cn(navigationMenuTriggerStyle(), triggerStyle, isActive('/contacto') && activeStyle)}
+                  >
                     Contacto
                   </Link>
                 </NavigationMenuItem>
@@ -187,7 +211,10 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-white/80 hover:text-white hover:bg-white/10 text-sm font-medium px-3 py-2 rounded-lg transition-colors"
+                className={cn(
+                  'text-white/80 hover:text-white hover:bg-white/10 text-sm font-medium px-3 py-2 rounded-lg transition-colors',
+                  isActive(link.href) && activeStyle
+                )}
                 onClick={() => setMenuOpen(false)}
               >
                 {link.label}

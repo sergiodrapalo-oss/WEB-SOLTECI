@@ -13,9 +13,8 @@ const productos = [
     tagline: 'El sistema contable más usado en Latinoamérica',
     desc: 'Automatiza tu contabilidad, nómina y facturación electrónica con la solución líder del mercado.',
     features: ['Contabilidad general', 'Nómina y RRHH', 'Facturación electrónica', 'Reportes fiscales'],
-    color: 'bg-blue-700',
-    src: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=480&h=200&fit=crop&auto=format',
-    alt: 'CONTPAQi sistema contable',
+    src: '/imagenes/contpaqi-contabilidad.png',
+    alt: 'Logo de CONTPAQi Contabilidad',
   },
   {
     name: 'SoftRestaurant',
@@ -23,9 +22,8 @@ const productos = [
     tagline: 'Control total de tu restaurante en un solo lugar',
     desc: 'Administra mesas, cocina, inventario y ventas con el software especializado para el sector gastronómico.',
     features: ['Control de mesas', 'Gestión de cocina', 'Control de inventario', 'Reportes de ventas'],
-    color: 'bg-orange-600',
-    src: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=480&h=200&fit=crop&auto=format',
-    alt: 'SoftRestaurant sistema para restaurantes',
+    src: '/imagenes/logo_softrestaurant.png',
+    alt: 'Logo de Soft Restaurant',
   },
   {
     name: 'iSync SAP B1',
@@ -33,9 +31,8 @@ const productos = [
     tagline: 'Tu fuerza de ventas conectada en tiempo real',
     desc: 'App móvil integrada con SAP Business One para tomar pedidos, consultar inventario y generar cotizaciones en campo.',
     features: ['Sincronización con SAP B1', 'Pedidos en campo', 'Consulta de inventario', 'Funciona offline'],
-    color: 'bg-green-700',
-    src: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=480&h=200&fit=crop&auto=format',
-    alt: 'iSync SAP B1 ventas móviles',
+    src: null, // composición personalizada (ícono iSync + SAP Business One)
+    alt: 'iSync integrado con SAP Business One',
   },
 ];
 
@@ -58,27 +55,53 @@ export default function Productos() {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
             >
-              {/* imagen con overlay de color */}
-              <div className="relative h-44">
-                <Image
-                  src={p.src}
-                  alt={p.alt}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover"
-                />
-                <div className={`absolute inset-0 ${p.color} opacity-75`} />
-                <div className="absolute inset-0 flex flex-col justify-end p-5">
-                  <span className="text-white/80 text-xs font-semibold uppercase tracking-widest mb-1">
-                    {p.category}
-                  </span>
-                  <h3 className="text-white font-extrabold text-2xl leading-tight">{p.name}</h3>
-                </div>
+              {/* logo del producto */}
+              <div className="relative h-44 bg-slate-50 border-b border-slate-100 flex items-center justify-center">
+                {p.src ? (
+                  <Image
+                    src={p.src}
+                    alt={p.alt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-contain p-5"
+                  />
+                ) : (
+                  /* iSync — composición: ícono + "Integrado con SAP Business One" */
+                  <div className="flex items-center gap-3 px-4">
+                    <div className="w-16 h-16 rounded-xl bg-primary flex items-center justify-center flex-shrink-0 p-3">
+                      <Image
+                        src="/imagenes/iSync_logo_white.svg"
+                        alt=""
+                        width={48}
+                        height={48}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <div>
+                      <div className="text-2xl font-extrabold text-primary leading-none">iSync</div>
+                      <div className="mt-1.5 flex items-center gap-1 text-slate-500 text-[11px] font-medium">
+                        Integrado con
+                        <Image
+                          src="/imagenes/sap-logo-svg.svg"
+                          alt="SAP"
+                          width={32}
+                          height={16}
+                          className="h-4 w-auto"
+                        />
+                        Business One
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* contenido */}
               <div className="p-6 flex flex-col flex-1 bg-white">
-                <p className="text-accent-dark font-semibold text-xs mb-2">{p.tagline}</p>
+                <span className="text-slate-400 text-xs font-semibold uppercase tracking-widest mb-1">
+                  {p.category}
+                </span>
+                <h3 className="text-primary font-extrabold text-2xl leading-tight mb-1">{p.name}</h3>
+                <p className="text-accent-dark font-semibold text-xs mb-3">{p.tagline}</p>
                 <p className="text-slate-500 text-sm leading-6 mb-4">{p.desc}</p>
 
                 <ul className="space-y-2 mb-6 flex-1">

@@ -24,9 +24,8 @@ const productos = [
       'Reportes financieros avanzados',
       'Multi-empresa y multi-sucursal',
     ],
-    imageSeed: 'contpaq-software',
-    imageAlt: 'Pantalla del sistema CONTPAQi',
-    accentColor: 'bg-blue-600',
+    logo: '/imagenes/contpaqi-contabilidad.png',
+    imageAlt: 'Logo de CONTPAQi Contabilidad',
   },
   {
     name: 'SoftRestaurant',
@@ -41,9 +40,8 @@ const productos = [
       'Reportes de ventas y costos',
       'Integración con dispositivos POS',
     ],
-    imageSeed: 'restaurant-management',
-    imageAlt: 'Pantalla del sistema SoftRestaurant',
-    accentColor: 'bg-orange-600',
+    logo: '/imagenes/logo_softrestaurant.png',
+    imageAlt: 'Logo de Soft Restaurant',
   },
   {
     name: 'iSync SAP B1',
@@ -58,9 +56,8 @@ const productos = [
       'Funciona en modo offline',
       'Disponible en iOS y Android',
     ],
-    imageSeed: 'mobile-sales',
-    imageAlt: 'Aplicación móvil iSync SAP B1',
-    accentColor: 'bg-green-700',
+    logo: null, // composición personalizada (ícono iSync + SAP Business One)
+    imageAlt: 'iSync integrado con SAP Business One',
   },
 ];
 
@@ -94,17 +91,45 @@ export default async function SoftwarePage() {
                 i % 2 === 1 ? 'lg:flex-row-reverse' : ''
               }`}
             >
-              {/* Image */}
+              {/* Image / logo */}
               <div className={`${i % 2 === 1 ? 'lg:order-2' : ''}`}>
-                <div className="relative h-72 rounded-2xl overflow-hidden shadow-xl">
-                  <Image
-                    src={`https://picsum.photos/seed/${producto.imageSeed}/600/288`}
-                    alt={producto.imageAlt}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-primary/40" />
+                <div className="relative h-72 rounded-2xl overflow-hidden shadow-xl bg-white flex items-center justify-center">
+                  {producto.logo ? (
+                    <Image
+                      src={producto.logo}
+                      alt={producto.imageAlt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-contain p-10"
+                    />
+                  ) : (
+                    /* iSync — composición: ícono + "Integrado con SAP Business One" */
+                    <div className="flex items-center gap-5 px-6">
+                      <div className="w-24 h-24 rounded-2xl bg-primary flex items-center justify-center flex-shrink-0 p-4">
+                        <Image
+                          src="/imagenes/iSync_logo_white.svg"
+                          alt=""
+                          width={64}
+                          height={64}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                      <div>
+                        <div className="text-4xl font-extrabold text-primary leading-none">iSync</div>
+                        <div className="mt-2 flex items-center gap-1.5 text-slate-500 text-sm font-medium">
+                          Integrado con
+                          <Image
+                            src="/imagenes/sap-logo-svg.svg"
+                            alt="SAP"
+                            width={40}
+                            height={20}
+                            className="h-5 w-auto"
+                          />
+                          Business One
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   <div className="absolute top-4 left-4">
                     <Badge label={producto.badge} variant="accent" />
                   </div>

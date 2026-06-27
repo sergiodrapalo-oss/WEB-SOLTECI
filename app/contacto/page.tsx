@@ -25,7 +25,7 @@ const infoContacto = [
     icon: MapPin,
     titulo: 'Ubicación',
     valor: 'Barrio Suyapa, Edificio Nova, San Pedro Sula, Honduras',
-    href: 'https://maps.google.com/?q=San+Pedro+Sula+Honduras',
+    href: 'https://maps.app.goo.gl/yJUkvHoGx3xcfAYj9',
   },
   {
     icon: Clock,

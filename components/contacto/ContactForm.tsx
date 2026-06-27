@@ -17,6 +17,8 @@ export default function ContactForm() {
   const [form, setForm] = useState<FormData>(emptyForm);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errors, setErrors] = useState<Partial<FormData>>({});
+  // Honeypot: campo invisible para humanos; los bots tienden a rellenarlo.
+  const [website, setWebsite] = useState('');
 
   function validate(): boolean {
     const errs: Partial<FormData> = {};
@@ -32,12 +34,18 @@ export default function ContactForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!validate()) return;
+    // Si el honeypot trae texto, es un bot: simulamos éxito y no enviamos nada.
+    if (website) {
+      setStatus('success');
+      setForm(emptyForm);
+      return;
+    }
     setStatus('loading');
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('/contacto.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, website }),
       });
       if (!res.ok) throw new Error();
       setStatus('success');
@@ -67,6 +75,17 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-4">
+      {/* Honeypot anti-spam: oculto para usuarios reales, no enviar datos aquí. */}
+      <input
+        type="text"
+        name="website"
+        value={website}
+        onChange={(e) => setWebsite(e.target.value)}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+      />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">

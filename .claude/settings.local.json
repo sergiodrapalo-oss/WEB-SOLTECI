@@ -9,7 +9,12 @@
       "PowerShell(New-Item -ItemType Directory -Force \"E:\\\\solteci-web\\\\components\\\\contacto\")",
       "PowerShell(New-Item -ItemType Directory -Force \"E:\\\\solteci-web\\\\components\\\\nosotros\")",
       "PowerShell(New-Item -ItemType Directory -Force \"E:\\\\solteci-web\\\\app\\\\api\\\\contact\")",
-      "PowerShell(cd e:\\\\solteci-web; npx playwright screenshot --browser chromium \"http://localhost:3000\" \"$env:TEMP\\\\home-screenshot.png\" 2>&1)"
+      "PowerShell(cd e:\\\\solteci-web; npx playwright screenshot --browser chromium \"http://localhost:3000\" \"$env:TEMP\\\\home-screenshot.png\" 2>&1)",
+      "PowerShell(npm install)",
+      "Bash(rm -rf .next)",
+      "Bash(npm run *)",
+      "Bash(php -v)",
+      "Bash(php -l \"C:/Users/Eder Sánchez/Documents/GitHub/WEB-SOLTECI/public/contacto.php\")"
     ]
   }
 }

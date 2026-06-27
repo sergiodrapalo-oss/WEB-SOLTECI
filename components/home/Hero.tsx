@@ -99,22 +99,24 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.2 }}
           >
             <div className="relative w-full max-w-md">
-              {/* Floating card decoration */}
-              <div className="absolute -top-6 -left-6 w-24 h-24 bg-accent/20 rounded-2xl border border-accent/30 flex items-center justify-center z-10">
+              {/* Floating badge — fondo sólido para ser legible sobre la tarjeta blanca */}
+              <div className="absolute -top-6 -left-6 w-24 h-24 bg-accent rounded-2xl shadow-xl flex items-center justify-center z-10">
                 <div className="text-center">
-                  <div className="text-accent font-extrabold text-xl">+20</div>
-                  <div className="text-white/70 text-xs leading-tight">años de<br />confianza</div>
+                  <div className="text-primary font-extrabold text-2xl leading-none">+20</div>
+                  <div className="text-primary/80 text-[11px] font-semibold leading-tight mt-1">
+                    años de<br />confianza
+                  </div>
                 </div>
               </div>
 
-              {/* Main image */}
-              <div className="rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+              {/* Tarjeta de marca — logo centrado vertical y horizontalmente */}
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10 bg-white flex items-center justify-center p-4">
                 <Image
-                  src="https://picsum.photos/seed/solteci-office/520/400"
-                  alt="Equipo Solteci trabajando"
+                  src="/imagenes/logo-solteci_fondo-blanco.png"
+                  alt="Solteci — Soluciones Tecnológicas y Contables Integradas"
                   width={520}
                   height={400}
-                  className="w-full object-cover"
+                  className="w-full h-auto object-contain"
                   priority
                 />
               </div>
