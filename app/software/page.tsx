@@ -18,7 +18,6 @@ const productos = [
     desc: 'CONTPAQi es la solución líder para la gestión contable y de nómina. Permite automatizar procesos, generar reportes fiscales, emitir facturas electrónicas y gestionar el capital humano desde una sola plataforma.',
     features: [
       'Contabilidad general y auxiliar',
-      'Nómina y gestión de RRHH',
       'Facturación electrónica',
       'Declaraciones fiscales',
       'Reportes financieros avanzados',
